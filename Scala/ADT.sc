@@ -1,6 +1,6 @@
 import scala.annotation.tailrec
 
-//very simple calculator's operation ADT
+//Very simple calculator's operation ADT
 sealed trait Operation
 final case class Addition(a: Operation, b: Operation) extends Operation
 final case class Subtraction(a: Operation, b: Operation) extends Operation
@@ -22,7 +22,7 @@ def simpleCalculator(operation: Operation): Double = operation match {
   case Value(n) => n
 }
 
-//own boolean implementation usd ADT
+//Own boolean implementation usd ADT
 sealed trait Bool
 case object True extends Bool
 case object False extends Bool
