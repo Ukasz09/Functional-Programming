@@ -1,4 +1,4 @@
-(* ADT for lazy list *)
+(* ADT for lazy list using function *)
 type 'a lazyList = LNil | LCons of 'a * (unit -> 'a lazyList);;
 
 (* Return head of lazy list *)
@@ -60,11 +60,4 @@ let rec lfilter pred = function
       else lfilter pred (xf())
 ;;
 
-(* Finding prime number by Erosthaenese method. Return infinitive primes list *)
-let eratosthenesPrimeGenerator =
-  let rec sieve = function
-      LCons(hd,tf) -> LCons(hd,function () -> sieve(lfilter(function n -> n mod hd <> 0)(tf())))
-    | LNil -> failwith "Internal error. Cannot be nil"
-  in sieve (lfrom 2)
-;;
 
