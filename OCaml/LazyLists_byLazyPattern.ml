@@ -50,3 +50,16 @@ let rec lfilter pred = function
   | LCons(x,lazy xf) -> if pred x then LCons(x, lazy(lfilter pred xf))
       else lfilter pred xf
 ;;
+
+(* Zip function for lazy lsits *)
+let rec lzip = function
+    (LCons(h1, lazy t1),LCons(h2, lazy t2)) -> LCons((h1, h2), lazy (lzip (t1, t2)))
+  | _ -> LNil
+;;
+
+
+(* Unzip function for lazy lsits *)
+let rec lunzip = function
+    LCons((h1, h2), lazy t) -> (LCons(h1, lazy (fst(lunzip t))), LCons(h2,lazy (snd(lunzip t))))
+  | LNil -> (LNil, LNil)
+;;
