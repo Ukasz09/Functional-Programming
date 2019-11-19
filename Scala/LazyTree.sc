@@ -1,9 +1,16 @@
 import scala.annotation.tailrec
 
+/**********************************************************************************************************************/
+//                                               Auxiliary tools
+/*********************************************************************************************************************/
 //Binary tree ADT
 sealed trait lBT[+A]
 case object LEmpty extends lBT[Nothing]
 case class LNode[+A](elem: A, left: () => lBT[A], right: () => lBT[A]) extends lBT[A]
+
+/**********************************************************************************************************************/
+//                                                   Functions
+/*********************************************************************************************************************/
 
 //Return size of binary tree (total number of nodes)
 def size[A](binaryTree: lBT[A]): Int = binaryTree match {

@@ -1,5 +1,9 @@
 import scala.annotation.tailrec
 
+/**********************************************************************************************************************/
+//                                               Auxiliary tools
+/*********************************************************************************************************************/
+
 //Very simple calculator's operation ADT
 sealed trait Operation
 final case class Addition(a: Operation, b: Operation) extends Operation
@@ -8,6 +12,15 @@ final case class Multiplication(a: Operation, b: Operation) extends Operation
 final case class Division(a: Operation, b: Operation) extends Operation
 final case class Negation(n: Operation) extends Operation
 final case class Value(n: Double) extends Operation
+
+//Own boolean implementation usd ADT
+sealed trait Bool
+case object True extends Bool
+case object False extends Bool
+
+/**********************************************************************************************************************/
+//                                                  Functions
+/*********************************************************************************************************************/
 
 def simpleCalculator(operation: Operation): Double = operation match {
   case Addition(a: Operation, b: Operation) => simpleCalculator(a) + simpleCalculator(b)
@@ -21,11 +34,6 @@ def simpleCalculator(operation: Operation): Double = operation match {
   case Negation(n) => -simpleCalculator(n)
   case Value(n) => n
 }
-
-//Own boolean implementation usd ADT
-sealed trait Bool
-case object True extends Bool
-case object False extends Bool
 
 def and(bool1: Bool, bool2: Bool): Bool = {
   (bool1, bool2) match {

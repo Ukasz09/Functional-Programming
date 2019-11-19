@@ -1,5 +1,9 @@
 import scala.annotation.tailrec
 
+/**********************************************************************************************************************/
+//                                               Functions
+/*********************************************************************************************************************/
+
 //Convert binary number (saved as list of 1 or 0 numbers) to decimal numbers
 def binaryToDecimal(binaryList: List[Byte]): Long = {
   @tailrec

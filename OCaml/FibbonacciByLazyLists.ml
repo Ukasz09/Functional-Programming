@@ -1,12 +1,15 @@
-type 'a llist = LNil | LCons of 'a * 'a llist Lazy.t
 
+(********************************************************************)
+(*                           Auxiliary tools                        *)
+(********************************************************************)
+
+type 'a llist = LNil | LCons of 'a * 'a llist Lazy.t
 
 (* Return first n elements (as list) from lazy list *)
 let rec ltake = function
     (0, _) -> []
   | (_, LNil) -> []
   | (n, LCons(x,lazy xf)) -> x::ltake(n-1, xf)
-
 ;;
 
 (* Return first n elements (as list) from lazy list *)
@@ -15,6 +18,10 @@ let rec apply = function
   |(0, LCons(x,_)) -> x 
   | (n, LCons(x,lazy xf)) -> apply(n-1, xf)
 ;;
+
+(********************************************************************)
+(*                             Functions                            *)
+(********************************************************************)
 
 (* Return lazy evaluated list with consecutives Fibbonacci numbers *)
 let lazyListFib= 

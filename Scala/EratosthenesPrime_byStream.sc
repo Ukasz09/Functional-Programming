@@ -1,3 +1,6 @@
+/**********************************************************************************************************************/
+//                                               Functions
+/*********************************************************************************************************************/
 //sieve of Eratosthenes based on lazy evaluation (only wen needed)
 val eratosthenesPrimeGenerator = {
   def sieve(lxs: Stream[Int]): Stream[Int] =  lxs match {

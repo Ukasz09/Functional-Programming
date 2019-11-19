@@ -26,3 +26,20 @@ let  breadthSearchByLazyList tree =
     |LEmpty::t ->search t 
     | LNode(h,lbt,rbt)::t -> LCons(h,function()->search (t@[lbt();rbt()]))
   in search[tree]
+
+(* Print tree (rotated 90 degrees) *)
+let printBT tree =
+  let rec printHelper(t, height) = match t with
+      LNode(value, left, right) ->
+        begin
+          printHelper(right(), height+1);
+
+          for i=0 to height-1 do print_string "---" done;
+          print_int value; print_newline();
+
+          printHelper(left(), height+1);
+        end
+    | LEmpty -> for i=0 to height-1 do print_string "---" done; print_endline "||"
+  in printHelper(tree, 0)
+;;
+
