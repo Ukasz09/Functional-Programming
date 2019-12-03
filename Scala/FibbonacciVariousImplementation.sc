@@ -1,8 +1,8 @@
 import scala.annotation.tailrec
 
-/**********************************************************************************************************************/
+/** ********************************************************************************************************************/
 //                                                Normal recursion
-/*********************************************************************************************************************/
+/** *******************************************************************************************************************/
 
 def fibNumberIndex(amount: Int): BigInt = {
   if (amount < 0)
@@ -29,9 +29,9 @@ def fibNumberList(amount: Int): List[BigInt] = {
   fibHelper(0)
 }
 
-/**********************************************************************************************************************/
+/** ********************************************************************************************************************/
 //                                                Tail recursion
-/*********************************************************************************************************************/
+/** *******************************************************************************************************************/
 
 //Return list with chosen amount of first Fibbonacci numbers in reverse order, by using tail recursion
 def tailFibNumberListRevers(amount: Int): List[BigInt] = {
@@ -62,13 +62,13 @@ def tailFibNumberIndex(index: Int): BigInt = {
 }
 
 
-/**********************************************************************************************************************/
+/** ********************************************************************************************************************/
 //                                            Lazy evaluated lists
-/*********************************************************************************************************************/
+/** *******************************************************************************************************************/
 
 //Return lazy evaluated list with consecutives Fibbonacci numbers
 val lazyListFib: LazyList[BigInt] =
-  BigInt(0) #:: BigInt(1) #:: lazyListFib.zip(lazyListFib.tail).map(n => n._1 + n._2)
+BigInt(0) #:: BigInt(1) #:: lazyListFib.zip(lazyListFib.tail).map(n => n._1 + n._2)
 
 //Return list with chosen amount of first Fibbonacci numbers by using lazy evaluation
 def lazyFibNumberList(amount: Int): List[BigInt] = {
@@ -83,4 +83,26 @@ def lazyFibNumberIndex(index: Int): BigInt = {
   if (index < 0)
     throw new Exception("Negative argument index=" + index)
   lazyListFib.apply(index)
+}
+
+/** ********************************************************************************************************************/
+//                                                By using OOP and companion object
+/** *******************************************************************************************************************/
+object Fibonacci {
+  var F = Map(0 -> 0, 1 -> 1)
+}
+
+class Fibonacci {
+  def atIndex(n: Int): Int = {
+    if (!Fibonacci.F.contains(n)) { //is already in Map
+      var k = 2
+      while (Fibonacci.F.contains(k))
+        k += 1
+      while (k <= n) {
+        Fibonacci.F += (k -> (Fibonacci.F(k - 1) + Fibonacci.F(k - 2)));
+        k += 1
+      }
+    }
+    Fibonacci.F(n)
+  }
 }
